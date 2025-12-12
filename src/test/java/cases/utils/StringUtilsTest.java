@@ -46,7 +46,7 @@ public class StringUtilsTest extends BaseTestCase {
         assertEquals("   ", StringUtils.capitalize("   "));
         assertEquals("123", StringUtils.capitalize("123"));
         assertEquals(" Abc", StringUtils.capitalize(" abc"));
-        assertEquals("A", StringUtils.capitalize("a"));
+        assertEquals("Ă", StringUtils.capitalize("ă"));
         assertEquals("A1b2c3", StringUtils.capitalize("a1b2c3"));
         assertEquals("1a2b3c", StringUtils.capitalize("1a2b3c"));
     }
@@ -63,9 +63,10 @@ public class StringUtilsTest extends BaseTestCase {
                     "'   ', '   '",
                     "123, 123",
                     "' abc', ' Abc'",
-                    "a, A",
+                    "ă, Ă",
                     "a1b2c3, A1b2c3",
-                    "1a2b3c, 1a2b3c"
+                    "1a2b3c, 1a2b3c",
+                    "😀, 😀"
             }, nullValues = "null")
     void testCapitalize(String input, String expected) {
         assertEquals(expected, StringUtils.capitalize(input));
