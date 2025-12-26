@@ -6,6 +6,13 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class DatetimeFormatterUtils {
+    public static final String JUST_NOW = "just now";
+    public static final String MINUTES_AGO = " minutes ago";
+    public static final String HOURS_AGO = " hours ago";
+    public static final String YESTERDAY = "yesterday";
+    public static final String DAYS_AGO = " days ago";
+    public static final String MONTHS_AGO = " months ago";
+    public static final String YEARS_AGO = " years ago";
 
     private DatetimeFormatterUtils() {
     }
@@ -64,14 +71,15 @@ public class DatetimeFormatterUtils {
         Duration diff = Duration.between(target, LocalDateTime.now());
         long seconds = diff.getSeconds();
 
-        if (seconds < 60) return "just now";
-        if (seconds < 3600) return (seconds / 60) + " minutes ago";
-        if (seconds < 86_400) return (seconds / 3600) + " hours ago";
-        if (seconds < 2 * 86_400) return "yesterday";
-        if (seconds < 30L * 86_400) return (seconds / 86_400) + " days ago";
-        if (seconds < 365L * 86_400) return (seconds / (30L * 86_400)) + " months ago";
+        if (seconds < 0) return null;
+        if (seconds < 60) return JUST_NOW;
+        if (seconds < 3600) return (seconds / 60) + MINUTES_AGO;
+        if (seconds < 86_400) return (seconds / 3600) + HOURS_AGO;
+        if (seconds < 2 * 86_400) return YESTERDAY;
+        if (seconds < 30L * 86_400) return (seconds / 86_400) + DAYS_AGO;
+        if (seconds < 365L * 86_400) return (seconds / (30L * 86_400)) + MONTHS_AGO;
 
-        return (seconds / (365L * 86_400)) + " years ago";
+        return (seconds / (365L * 86_400)) + YEARS_AGO;
     }
 
     /**

@@ -71,4 +71,31 @@ public class StringUtilsTest extends BaseTestCase {
     void testCapitalize(String input, String expected) {
         assertEquals(expected, StringUtils.capitalize(input));
     }
+
+    @ParameterizedTest
+    @CsvSource(
+            value = {
+                    "null, null",
+                    "abcd, dcba"
+            }, nullValues = "null")
+    void testReserve(String input, String expected) {
+        assertEquals(expected, StringUtils.reverse(input));
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            value = {
+                    "null, abc, false",
+                    "abc, null, false",
+                    "null, null, false",
+                    "abc, ABCD, true",
+                    "abc, XabC, true",
+                    "abc, XyZT, false",
+                    ".@, kshjdsahg.@, true",
+                    "😀, bsjhdgf😀LKFJLKS, true",
+                    "Kỳ, Nguyễn Đăng Kỳ, true"
+            }, nullValues = "null")
+    void testContainsIgnoreCase(String search, String text, boolean expected) {
+        assertEquals(expected, StringUtils.containsIgnoreCase(text, search));
+    }
 }

@@ -2,6 +2,7 @@ package base;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.mockito.Mockito;
 
 abstract public class BaseTestCase {
     @BeforeEach
@@ -11,6 +12,8 @@ abstract public class BaseTestCase {
 
     @AfterEach
     protected void afterEach() {
+
         System.out.println("After each test");
+        Mockito.framework().clearInlineMocks();
     }
 }
