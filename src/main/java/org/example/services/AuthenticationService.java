@@ -1,7 +1,8 @@
 package org.example.services;
 
 import lombok.AllArgsConstructor;
-import org.example.models.AuthData;
+import org.example.dto.AuthData;
+import org.example.dto.RegisterDTO;
 import org.example.models.User;
 import org.example.repositories.UserRepository;
 import org.example.services.interfaces.IAuthenticationService;
@@ -20,5 +21,17 @@ public class AuthenticationService implements IAuthenticationService {
                 user,
                 TokenUtils.generate() // accessToken
         );
+    }
+
+    @Override
+    public AuthData register(RegisterDTO registerDTO) {
+        // Check email ton tai
+        if (userRepository.existsByEmail(registerDTO.getEmail())) {
+            return null;
+        }
+        User user = User.fromRegisterDTO(registerDTO);
+        userRepository.save(user);
+
+        return new AuthData(user, TokenUtils.generate());
     }
 }
