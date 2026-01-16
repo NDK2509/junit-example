@@ -6,12 +6,12 @@ import org.mockito.Mockito;
 
 abstract public class BaseTestCase {
     @BeforeEach
-    protected void beforeEach() {
+    protected void setup() {
         System.out.println("Before each test");
     }
 
     @AfterEach
-    protected void afterEach() {
+    protected void teardown() {
 
         System.out.println("After each test");
         Mockito.framework().clearInlineMocks();
